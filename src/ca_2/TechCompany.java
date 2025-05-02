@@ -26,8 +26,8 @@ public class TechCompany {
     // Field to store the company name
     private String companyName;
 
-    // List to store names of employees
-    private List<String> employeeList;
+    // List to store Employee objects instead of just names
+    private List<Employee> employeeList;
 
     // Constructor that accepts a company name and initialises the employee list
     public TechCompany(String companyName) {
@@ -37,25 +37,38 @@ public class TechCompany {
 
     /**
      * Adds a new employee to the list based on user input.
+     * Now includes first name and surname input separately.
      */
     public void addEmployeeManually() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter employee name: ");
-        String name = scanner.nextLine();
-        employeeList.add(name);
-        System.out.println("Employee added: " + name);
+        System.out.print("Enter employee's first name: ");
+        String firstName = scanner.nextLine();
+
+        System.out.print("Enter employee's surname: ");
+        String surname = scanner.nextLine();
+
+        Employee newEmployee = new Employee(firstName, surname);
+        employeeList.add(newEmployee);
+
+        System.out.println("Employee added: " + newEmployee.getFullName());
     }
 
     /**
-     * Generates a random employee name and adds it to the list.
-     * The name is chosen from a predefined pool of first names.
+     * Generates a random employee with a first name and surname.
+     * Uses two separate arrays to pick each part of the name.
      */
     public void generateRandomEmployee() {
-        String[] names = {"Alice", "Oisin", "Darragh", "Diana", "Ethan", "Fiona", "Saoirce", "Cian",};
+        String[] firstNames = {"Alice", "Oisin", "Darragh", "Diana", "Ethan", "Fiona", "Saoirce", "Cian"};
+        String[] surnames = {"Murphy", "Kelly", "O'Brien", "Doyle", "Byrne", "Walsh", "Ryan", "Smith"};
+
         Random rand = new Random();
-        String randomName = names[rand.nextInt(names.length)];
-        employeeList.add(randomName);
-        System.out.println("Random employee generated and added: " + randomName);
+        String randomFirstName = firstNames[rand.nextInt(firstNames.length)];
+        String randomSurname = surnames[rand.nextInt(surnames.length)];
+
+        Employee randomEmployee = new Employee(randomFirstName, randomSurname);
+        employeeList.add(randomEmployee);
+
+        System.out.println("Random employee generated and added: " + randomEmployee.getFullName());
     }
 
     /**
@@ -64,46 +77,56 @@ public class TechCompany {
     public String getCompanyName() {
         return companyName;
     }
-    
-    //Method 1: Search Employee by Name
-/**
- * Prompts the user to enter a name and checks if it exists in the employee list.
- */
-public void searchEmployeeByName() {
-    Scanner scanner = new Scanner(System.in);
-    System.out.print("Enter the employee name to search: ");
-    String searchName = scanner.nextLine();
 
-    if (employeeList.contains(searchName)) {
-        System.out.println("Employee found: " + searchName);
-    } else {
-        System.out.println("Employee not found.");
-    }
-}
+    // Method 1: Search Employee by Name
+    /**
+     * Prompts the user to enter a name and checks if it exists in the employee list.
+     * Now case-insensitive and supports full name search.
+     */
+    public void searchEmployeeByName() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the full name of the employee to search: ");
+        String searchName = scanner.nextLine().toLowerCase();
 
-// Method 2: Sort Employees Alphabetically
-/**
- * Sorts the employee list alphabetically and displays the result.
- */
-public void sortEmployeesAlphabetically() {
-    Collections.sort(employeeList);
-    System.out.println("Employees sorted alphabetically.");
-    displayAllEmployees(); // Call this method to show the sorted list
-}
+        boolean found = false;
+        for (Employee emp : employeeList) {
+            if (emp.getFullName().toLowerCase().equals(searchName)) {
+                System.out.println("Employee found: " + emp.getFullName());
+                found = true;
+                break;
+            }
+        }
 
-// Method 3: Display All Employees
-/**
- * Displays all employee names in the list.
- */
-public void displayAllEmployees() {
-    if (employeeList.isEmpty()) {
-        System.out.println("No employees in the list.");
-    } else {
-        System.out.println("Employee List:");
-        for (String name : employeeList) {
-            System.out.println("- " + name);
+        if (!found) {
+            System.out.println("Employee not found.");
         }
     }
-}
 
-}
+    // Method 2: Sort Employees Alphabetically
+    /**
+     * Sorts the employee list alphabetically and displays the result.
+     * Sorting is done by full name in a case-insensitive manner.
+     */
+    public void sortEmployeesAlphabetically() {
+        employeeList.sort((a, b) -> a.getFullName().compareToIgnoreCase(b.getFullName()));
+        System.out.println("Employees sorted alphabetically.");
+        displayAllEmployees();
+    }
+
+    // Method 3: Display All Employees
+    /**
+     * Displays all employee full names in the list.
+     * Also shows the total count of employees.
+     */
+    public void displayAllEmployees() {
+        if (employeeList.isEmpty()) {
+            System.out.println("No employees in the list.");
+        } else {
+            System.out.println("Employee List:");
+            for (Employee emp : employeeList) {
+                System.out.println("- " + emp.getFullName());
+            }
+            System.out.println("Total employees: " + employeeList.size());
+        }
+    }
+} 
