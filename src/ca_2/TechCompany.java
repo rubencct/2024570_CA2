@@ -78,29 +78,32 @@ public class TechCompany {
         return companyName;
     }
 
-    // Method 1: Search Employee by Name
+    // Method 1: Search Employee by Name and Surname    
     /**
-     * Prompts the user to enter a name and checks if it exists in the employee list.
-     * Now case-insensitive and supports full name search.
-     */
+    * Prompts the user to enter a name and checks if it exists in the employee list.
+    * The comparison ignores case and matches even if it's a partial name (e.g. "rubén", "vera", "ru").
+    */
     public void searchEmployeeByName() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter the full name of the employee to search: ");
-        String searchName = scanner.nextLine().toLowerCase();
+       Scanner scanner = new Scanner(System.in);
+       System.out.print("Enter the employee name to search: ");
+       String searchName = scanner.nextLine().toLowerCase(); // Convert input to lowercase
 
-        boolean found = false;
-        for (Employee emp : employeeList) {
-            if (emp.getFullName().toLowerCase().equals(searchName)) {
-                System.out.println("Employee found: " + emp.getFullName());
-                found = true;
-                break;
-            }
-        }
+       boolean found = false;
 
-        if (!found) {
-            System.out.println("Employee not found.");
-        }
-    }
+       for (Employee emp : employeeList) {
+           String fullName = emp.getFullName().toLowerCase(); // Convert stored name to lowercase
+           if (fullName.contains(searchName)) {
+               System.out.println("Employee found: " + emp.getFullName());
+               found = true;
+               break;
+           }
+       }
+
+       if (!found) {
+           System.out.println("Employee not found.");
+       }
+   }
+    
 
     // Method 2: Sort Employees Alphabetically
     /**
