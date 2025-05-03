@@ -38,19 +38,50 @@ public class TechCompany {
     /**
      * Adds a new employee to the list based on user input.
      * Now includes first name and surname input separately.
+     * Also validates that input is not empty or purely numeric.
      */
     public void addEmployeeManually() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter employee's first name: ");
-        String firstName = scanner.nextLine();
 
-        System.out.print("Enter employee's surname: ");
-        String surname = scanner.nextLine();
+        String firstName;
+        while (true) {
+            System.out.print("Enter employee's first name: ");
+            firstName = scanner.nextLine().trim();
+            if (firstName.isEmpty() || firstName.matches("\\d+")) {
+                System.out.println("First name cannot be empty or just numbers. Please enter a proper name.");
+            } else {
+                break;
+            }
+        }
+
+        String surname;
+        while (true) {
+            System.out.print("Enter employee's surname: ");
+            surname = scanner.nextLine().trim();
+            if (surname.isEmpty() || surname.matches("\\d+")) {
+                System.out.println("Surname cannot be empty or just numbers. Please enter a proper surname.");
+            } else {
+                break;
+            }
+        }
 
         Employee newEmployee = new Employee(firstName, surname);
-        employeeList.add(newEmployee);
 
-        System.out.println("Employee added: " + newEmployee.getFullName());
+        // Check for duplicates before adding
+        boolean exists = false;
+        for (Employee emp : employeeList) {
+            if (emp.getFullName().equalsIgnoreCase(newEmployee.getFullName())) {
+                exists = true;
+                break;
+            }
+        }
+
+        if (exists) {
+            System.out.println("This Employee already exists: " + newEmployee.getFullName());
+        } else {
+            employeeList.add(newEmployee);
+            System.out.println("Employee added: " + newEmployee.getFullName());
+        }
     }
 
     /**
@@ -78,32 +109,31 @@ public class TechCompany {
         return companyName;
     }
 
-    // Method 1: Search Employee by Name and Surname    
+    // Method 1: Search Employee by Name
     /**
-    * Prompts the user to enter a name and checks if it exists in the employee list.
-    * The comparison ignores case and matches even if it's a partial name (e.g. "rubén", "vera", "ru").
-    */
+     * Prompts the user to enter a name and checks if it exists in the employee list.
+     * The comparison ignores case and matches even if it's a partial name (e.g. "rubén", "vera", "ru").
+     */
     public void searchEmployeeByName() {
-       Scanner scanner = new Scanner(System.in);
-       System.out.print("Enter the employee name to search: ");
-       String searchName = scanner.nextLine().toLowerCase(); // Convert input to lowercase
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the employee name to search: ");
+        String searchName = scanner.nextLine().toLowerCase();
 
-       boolean found = false;
+        boolean found = false;
 
-       for (Employee emp : employeeList) {
-           String fullName = emp.getFullName().toLowerCase(); // Convert stored name to lowercase
-           if (fullName.contains(searchName)) {
-               System.out.println("Employee found: " + emp.getFullName());
-               found = true;
-               break;
-           }
-       }
+        for (Employee emp : employeeList) {
+            String fullName = emp.getFullName().toLowerCase();
+            if (fullName.contains(searchName)) {
+                System.out.println("Employee found: " + emp.getFullName());
+                found = true;
+                break;
+            }
+        }
 
-       if (!found) {
-           System.out.println("Employee not found.");
-       }
-   }
-    
+        if (!found) {
+            System.out.println("Employee not found.");
+        }
+    }
 
     // Method 2: Sort Employees Alphabetically
     /**
@@ -123,7 +153,7 @@ public class TechCompany {
      */
     public void displayAllEmployees() {
         if (employeeList.isEmpty()) {
-            System.out.println("No employees in the list.");
+            System.out.println("There's no employees in the list.");
         } else {
             System.out.println("Employee List:");
             for (Employee emp : employeeList) {
