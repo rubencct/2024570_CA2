@@ -45,6 +45,20 @@ public class Employee {
     }
 
     /**
+     * Updates the employee's first name
+     */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    /**
+     * Updates the employee's surname
+     */
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+    
+    /**
      * Returns the full name of the employee
      */
     public String getFullName() {

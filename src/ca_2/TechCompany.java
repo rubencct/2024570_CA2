@@ -19,7 +19,7 @@ import java.util.Random;
 /**
  * Represents a technology company that manages a list of employees.
  * Includes functionality to add employees manually, generate random ones,
- * and perform searches.
+ * perform searches, and edit employee information.
  */
 public class TechCompany {
 
@@ -161,5 +161,63 @@ public class TechCompany {
             }
             System.out.println("Total employees: " + employeeList.size());
         }
+    }
+
+    // Method 4: Edit an existing employee's name
+    /**
+     * Allows editing an existing employee's first name and/or surname.
+     * Supports partial name search and lets the user choose the correct employee.
+     */
+    public void editEmployeeDetails() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter part of the employee's name to edit: ");
+        String searchQuery = scanner.nextLine().toLowerCase();
+
+        // Find all employees that match the query
+        List<Employee> matches = new ArrayList<>();
+        for (Employee emp : employeeList) {
+            if (emp.getFullName().toLowerCase().contains(searchQuery)) {
+                matches.add(emp);
+            }
+        }
+
+        // Handle no matches
+        if (matches.isEmpty()) {
+            System.out.println("No matching employees found.");
+            return;
+        }
+
+        // Handle multiple matches
+        Employee selectedEmployee = null;
+        if (matches.size() == 1) {
+            selectedEmployee = matches.get(0);
+        } else {
+            System.out.println("Multiple matches found:");
+            for (int i = 0; i < matches.size(); i++) {
+                System.out.println((i + 1) + ". " + matches.get(i).getFullName());
+            }
+            System.out.print("Select the number of the employee to edit: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+            if (choice >= 1 && choice <= matches.size()) {
+                selectedEmployee = matches.get(choice - 1);
+            } else {
+                System.out.println("Invalid choice. Edit cancelled.");
+                return;
+            }
+        }
+
+        // Get new details
+        System.out.print("Enter new first name: ");
+        String newFirstName = scanner.nextLine().trim();
+        System.out.print("Enter new surname: ");
+        String newSurname = scanner.nextLine().trim();
+
+        selectedEmployee.setFirstName(newFirstName);
+        selectedEmployee.setSurname(newSurname);
+
+        System.out.println("Employee information updated: " + selectedEmployee.getFullName());
+        System.out.println(); //Visual space
+
     }
 } 

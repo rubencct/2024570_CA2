@@ -40,21 +40,32 @@ public class StackFlowApp {
             switch (userChoice) {
                 case "1":
                     stackFlowCompany.addEmployeeManually();
+                    System.out.println("\n\n"); //for visual separation 
                     break;
                 case "2":
                     stackFlowCompany.generateRandomEmployee();
+                    System.out.println("\n\n"); //for visual separation 
                     break;
                 case "3":
                     stackFlowCompany.searchEmployeeByName();
+                    System.out.println("\n\n"); //for visual separation 
                     break;
                 case "4":
                     stackFlowCompany.sortEmployeesAlphabetically();
+                    System.out.println("\n\n"); //for visual separation 
                     break;
                 case "5":
                     stackFlowCompany.displayAllEmployees();
+                    System.out.println("\n\n"); //for visual separation 
                     break;
                 case "6":
-                    System.out.println("Thanks for using StackFlow Systems application. Goodbye!");
+                    stackFlowCompany.editEmployeeDetails();
+                    System.out.println("\n\n"); //for visual separation 
+                    break;
+                    case "7":
+                    System.out.println("Thanks for using StackFlow Systems application");
+                    System.out.println("StackFlow Systems Ltd. - Developed by Rubén Vera");
+                    System.out.println("Goodbye!");
                     keepRunning = false;
                     break;
                 default:
@@ -67,13 +78,14 @@ public class StackFlowApp {
      * Displays the main user menu with available options.
      */
     private static void showMenu() {
-        System.out.println("\n===== STACKFLOW SYSTEMS MENU =====");
+        System.out.println("===== STACKFLOW SYSTEMS MENU =====");
         System.out.println("1. Add new employee manually");
         System.out.println("2. Generate random employee");
         System.out.println("3. Search for employee by name");
         System.out.println("4. Sort employees alphabetically");
         System.out.println("5. Display all employees");
-        System.out.println("6. Exit");
+        System.out.println("6. Edit employee details");
+        System.out.println("7. Exit");
         System.out.println("==================================");
     }
 }
