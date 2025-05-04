@@ -38,7 +38,7 @@ public class TechCompany {
     /**
      * Adds a new employee to the list based on user input.
      * Now includes first name and surname input separately.
-     * Also validates that input is not empty or purely numeric.
+     * Also validates that input is not empty or contains invalid characters.
      */
     public void addEmployeeManually() {
         Scanner scanner = new Scanner(System.in);
@@ -47,8 +47,8 @@ public class TechCompany {
         while (true) {
             System.out.print("Enter employee's first name: ");
             firstName = scanner.nextLine().trim();
-            if (firstName.isEmpty() || firstName.matches("\\d+")) {
-                System.out.println("First name cannot be empty or just numbers. Please enter a proper name.");
+            if (firstName.isEmpty() || !firstName.matches("^[\\p{L} '-]+$")) {
+                System.out.println("First name must only contain letters, spaces, apostrophes or hyphens. Please try again.");
             } else {
                 break;
             }
@@ -58,8 +58,8 @@ public class TechCompany {
         while (true) {
             System.out.print("Enter employee's surname: ");
             surname = scanner.nextLine().trim();
-            if (surname.isEmpty() || surname.matches("\\d+")) {
-                System.out.println("Surname cannot be empty or just numbers. Please enter a proper surname.");
+            if (surname.isEmpty() || !surname.matches("^[\\p{L} '-]+$")) {
+                System.out.println("Surname must only contain letters, spaces, apostrophes or hyphens. Please try again.");
             } else {
                 break;
             }
