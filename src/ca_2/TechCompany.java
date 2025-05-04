@@ -191,6 +191,8 @@ public class TechCompany {
         Employee selectedEmployee = null;
         if (matches.size() == 1) {
             selectedEmployee = matches.get(0);
+                System.out.println("Match found: " + selectedEmployee.getFullName()); // Shows selected user
+
         } else {
             System.out.println("Multiple matches found:");
             for (int i = 0; i < matches.size(); i++) {
