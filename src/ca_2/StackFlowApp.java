@@ -34,7 +34,7 @@ public class StackFlowApp {
 
         while (keepRunning) {
             showMenu();
-            System.out.print("Please select an option (1-6): ");
+            System.out.print("Please select an option (1-8): ");
             String userChoice = keyboardScanner.nextLine();
 
             switch (userChoice) {
@@ -62,7 +62,11 @@ public class StackFlowApp {
                     stackFlowCompany.editEmployeeDetails();
                     System.out.println("\n\n"); //for visual separation 
                     break;
-                    case "7":
+                case "7":
+                    stackFlowCompany.deleteEmployee();
+                    System.out.println("\n\n"); // for visual separation
+                    break;   
+                    case "8":
                     System.out.println("Thanks for using StackFlow Systems application");
                     System.out.println("StackFlow Systems Ltd. - Developed by Rubén Vera");
                     System.out.println("Goodbye!");
@@ -85,7 +89,8 @@ public class StackFlowApp {
         System.out.println("4. Sort employees alphabetically");
         System.out.println("5. Display all employees");
         System.out.println("6. Edit employee details");
-        System.out.println("7. Exit");
+        System.out.println("7. Delete employee");
+        System.out.println("8. Exit");
         System.out.println("==================================");
     }
 }

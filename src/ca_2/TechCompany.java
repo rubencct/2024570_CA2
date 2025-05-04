@@ -18,15 +18,15 @@ import java.util.Random;
 
 /**
  * Represents a technology company that manages a list of employees.
- * Includes functionality to add employees manually, generate random ones,
- * perform searches, and edit employee information.
+ * Includes functionality to add, generate, search, sort, display, edit,
+ * and delete employees.
  */
 public class TechCompany {
 
     // Field to store the company name
     private String companyName;
 
-    // List to store Employee objects instead of just names
+    // List to store Employee objects
     private List<Employee> employeeList;
 
     // Constructor that accepts a company name and initialises the employee list
@@ -35,6 +35,7 @@ public class TechCompany {
         this.employeeList = new ArrayList<>();
     }
 
+    // Method 1: Add a new employee manually
     /**
      * Adds a new employee to the list based on user input.
      * Now includes first name and surname input separately.
@@ -84,6 +85,7 @@ public class TechCompany {
         }
     }
 
+    // Method 2: Generate a random employee
     /**
      * Generates a random employee with a first name and surname.
      * Uses two separate arrays to pick each part of the name.
@@ -109,10 +111,10 @@ public class TechCompany {
         return companyName;
     }
 
-    // Method 1: Search Employee by Name
+    // Method 3: Search employee by name
     /**
      * Prompts the user to enter a name and checks if it exists in the employee list.
-     * The comparison ignores case and matches even if it's a partial name (e.g. "rubén", "vera", "ru").
+     * The comparison ignores case and matches even if it's a partial name.
      */
     public void searchEmployeeByName() {
         Scanner scanner = new Scanner(System.in);
@@ -135,7 +137,7 @@ public class TechCompany {
         }
     }
 
-    // Method 2: Sort Employees Alphabetically
+    // Method 4: Sort employees alphabetically
     /**
      * Sorts the employee list alphabetically and displays the result.
      * Sorting is done by full name in a case-insensitive manner.
@@ -146,7 +148,7 @@ public class TechCompany {
         displayAllEmployees();
     }
 
-    // Method 3: Display All Employees
+    // Method 5: Display all employees
     /**
      * Displays all employee full names in the list.
      * Also shows the total count of employees.
@@ -163,7 +165,7 @@ public class TechCompany {
         }
     }
 
-    // Method 4: Edit an existing employee's name
+    // Method 6: Edit employee details
     /**
      * Allows editing an existing employee's first name and/or surname.
      * Supports partial name search and lets the user choose the correct employee.
@@ -191,8 +193,7 @@ public class TechCompany {
         Employee selectedEmployee = null;
         if (matches.size() == 1) {
             selectedEmployee = matches.get(0);
-                System.out.println("Match found: " + selectedEmployee.getFullName()); // Shows selected user
-
+            System.out.println("Match found: " + selectedEmployee.getFullName());
         } else {
             System.out.println("Multiple matches found:");
             for (int i = 0; i < matches.size(); i++) {
@@ -219,7 +220,58 @@ public class TechCompany {
         selectedEmployee.setSurname(newSurname);
 
         System.out.println("Employee information updated: " + selectedEmployee.getFullName());
-        System.out.println(); //Visual space
-
+        System.out.println();
     }
-} 
+    // Method 7: Delete an Employee
+    /**
+     * Deletes an employee based on a partial or full name match.
+     * If multiple matches are found, the user selects the correct one to delete.
+     */
+    public void deleteEmployee() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter part of the employee's name to delete: ");
+        String searchQuery = scanner.nextLine().toLowerCase();
+
+        // Find all matches
+        List<Employee> matches = new ArrayList<>();
+        for (Employee emp : employeeList) {
+            if (emp.getFullName().toLowerCase().contains(searchQuery)) {
+                matches.add(emp);
+            }
+        }
+
+        // No match found
+        if (matches.isEmpty()) {
+            System.out.println("No matching employees found.");
+            return;
+        }
+
+        // Only one match found
+        Employee employeeToDelete = null;
+        if (matches.size() == 1) {
+            employeeToDelete = matches.get(0);
+            System.out.println("Match found: " + employeeToDelete.getFullName());
+        } else {
+            // Multiple matches
+            System.out.println("Multiple matches found:");
+            for (int i = 0; i < matches.size(); i++) {
+                System.out.println((i + 1) + ". " + matches.get(i).getFullName());
+            }
+            System.out.print("Select the number of the employee to delete: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+
+            if (choice >= 1 && choice <= matches.size()) {
+                employeeToDelete = matches.get(choice - 1);
+            } else {
+                System.out.println("Invalid choice. Deletion cancelled.");
+                return;
+            }
+        }
+
+        // Confirm and delete
+        System.out.println("Employee deleted: " + employeeToDelete.getFullName());
+        employeeList.remove(employeeToDelete);
+        System.out.println(); // Visual space
+    }
+}
