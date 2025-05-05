@@ -8,7 +8,6 @@ package ca_2;
  *
  * @author ruben_1d
  */
-    
     /**
  * Main entry point for StackFlow Systems application.
  * This program simulates a tech company managing employees and departments using Java OOP principles.

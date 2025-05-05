@@ -251,6 +251,13 @@ public class TechCompany {
         if (matches.size() == 1) {
             employeeToDelete = matches.get(0);
             System.out.println("Match found: " + employeeToDelete.getFullName());
+            System.out.print("Are you sure you want to delete this employee? (Y/N): ");
+            String confirmation = scanner.nextLine().trim().toLowerCase();
+            if (!confirmation.equalsIgnoreCase("y")) {
+                System.out.println("Deletion cancelled.");
+                return;
+            }
+                    
         } else {
             // Multiple matches
             System.out.println("Multiple matches found:");
