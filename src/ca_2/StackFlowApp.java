@@ -80,11 +80,19 @@ public class StackFlowApp {
                     break;
                 case "8":
                     // Exit the program with a goodbye message
-                    System.out.println("Thanks for using StackFlow Systems application");
-                    System.out.println("StackFlow Systems Ltd. - Developed by Rubén Vera");
-                    System.out.println("Goodbye!");
-                    keepRunning = false;
-                    break;
+                    System.out.print("Are you sure you want to exit the program? (Y/N): ");
+                        String confirmExit = keyboardScanner.nextLine().trim().toLowerCase();
+                        if (confirmExit.equals("y")) {
+                            System.out.println("Thanks for using StackFlow Systems application");
+                            System.out.println("StackFlow Systems Ltd. - Developed by Rubén Vera");
+                            System.out.println("Goodbye!");
+                            keepRunning = false;
+                        } else {
+                            System.out.println("Exit cancelled. Returning to menu...");
+                        }
+                        System.out.println(); // visual space
+                        break;
+                    
                 default:
                     // Invalid input handling
                     System.out.println("Invalid option. Please enter a number between 1 and 8.\n");

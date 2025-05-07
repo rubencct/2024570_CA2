@@ -51,14 +51,23 @@ public class TechCompany {
     }
 
     // Method 1: Add a new employee manually
+    /**
+     * Prompts the user to manually input an employee's first name and surname.
+     * Performs validation to ensure the input is not empty and contains only allowed characters.
+     * It also checks for duplicates before adding the employee.
+     */
     public void addEmployeeManually() {
         Scanner scanner = new Scanner(System.in);
 
         // Get and validate first name
         String firstName;
         while (true) {
-            System.out.print("Enter employee's first name: ");
+            System.out.print("Enter employee's first name (or type 'CANCEL' to return): ");
             firstName = scanner.nextLine().trim();
+            if (firstName.equalsIgnoreCase("cancel")) {
+                System.out.println("Action cancelled. Returning to main menu.");
+                return;
+            }
             if (firstName.isEmpty() || !firstName.matches("^[\\p{L} '-]+$")) {
                 System.out.println("First name must only contain letters, spaces, apostrophes or hyphens. Please try again.");
             } else {
@@ -69,14 +78,19 @@ public class TechCompany {
         // Get and validate surname
         String surname;
         while (true) {
-            System.out.print("Enter employee's surname: ");
+            System.out.print("Enter employee's surname (or type 'CANCEL' to return): ");
             surname = scanner.nextLine().trim();
+            if (surname.equalsIgnoreCase("cancel")) {
+                System.out.println("Action cancelled. Returning to main menu.");
+                return;
+            }
             if (surname.isEmpty() || !surname.matches("^[\\p{L} '-]+$")) {
                 System.out.println("Surname must only contain letters, spaces, apostrophes or hyphens. Please try again.");
             } else {
                 break;
             }
         }
+
 
         // Select role
         System.out.println("Select a role for this employee:");
@@ -234,11 +248,21 @@ public class TechCompany {
             }
         }
 
-        // Get new details from the user
-        System.out.print("Enter new first name: ");
+        // Get new details from the user    
+        System.out.print("Enter new first name (or type 'cancel' to return): ");
         String newFirstName = scanner.nextLine().trim();
-        System.out.print("Enter new surname: ");
+        if (newFirstName.equalsIgnoreCase("cancel")) {
+            System.out.println("Edit operation cancelled.");
+            return;
+        }
+
+        
+        System.out.print("Enter new surname (or type 'cancel' to return): ");
         String newSurname = scanner.nextLine().trim();
+        if (newSurname.equalsIgnoreCase("cancel")) {
+            System.out.println("Edit operation cancelled.");
+            return;
+        }
 
         selectedEmployee.setFirstName(newFirstName);
         selectedEmployee.setSurname(newSurname);
