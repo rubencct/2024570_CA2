@@ -32,6 +32,15 @@ public class TechCompany {
     // Stores all employees added to the system
     private List<Employee> employeeList;
 
+    // Predefined list of roles available in the company
+    private final String[] roles = {
+        "Computer Technician",
+        "Printer Technician",
+        "CCTV Installer",
+        "Front Desk Assistant",
+        "Cashier"
+    };
+
     /**
      * Constructor to initialise the company with a given name.
      * It also prepares an empty list to hold employee records.
@@ -42,15 +51,10 @@ public class TechCompany {
     }
 
     // Method 1: Add a new employee manually
-    /**
-     * Prompts the user to manually input an employee's first name and surname.
-     * Performs validation to ensure the input is not empty and contains only allowed characters.
-     * It also checks for duplicates before adding the employee.
-     */
     public void addEmployeeManually() {
         Scanner scanner = new Scanner(System.in);
 
-        // Validation for first name
+        // Get and validate first name
         String firstName;
         while (true) {
             System.out.print("Enter employee's first name: ");
@@ -62,7 +66,7 @@ public class TechCompany {
             }
         }
 
-        // Validation for surname
+        // Get and validate surname
         String surname;
         while (true) {
             System.out.print("Enter employee's surname: ");
@@ -74,7 +78,25 @@ public class TechCompany {
             }
         }
 
-        Employee newEmployee = new Employee(firstName, surname);
+        // Select role
+        System.out.println("Select a role for this employee:");
+        for (int i = 0; i < roles.length; i++) {
+            System.out.println((i + 1) + ". " + roles[i]);
+        }
+        String role;
+        while (true) {
+            System.out.print("Enter the number of the role: ");
+            int roleChoice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+            if (roleChoice >= 1 && roleChoice <= roles.length) {
+                role = roles[roleChoice - 1];
+                break;
+            } else {
+                System.out.println("Invalid choice. Please try again.");
+            }
+        }
+
+        Employee newEmployee = new Employee(firstName, surname, role);
 
         // Check for duplicates before adding
         boolean exists = false;
@@ -89,32 +111,26 @@ public class TechCompany {
             System.out.println("This Employee already exists: " + newEmployee.getFullName());
         } else {
             employeeList.add(newEmployee);
-            System.out.println("Employee added: " + newEmployee.getFullName());
+            System.out.println("Employee added: " + newEmployee);
         }
     }
 
     // Method 2: Generate a random employee
-    /**
-     * Automatically generates an employee by randomly combining a first name and surname.
-     * The names are chosen from predefined name pools.
-     */
     public void generateRandomEmployee() {
         String[] firstNames = {"Alice", "Oisin", "Darragh", "Diana", "Ethan", "Fiona", "Saoirce", "Cian"};
         String[] surnames = {"Murphy", "Kelly", "O'Brien", "Doyle", "Byrne", "Walsh", "Ryan", "Smith"};
-
         Random rand = new Random();
+
         String randomFirstName = firstNames[rand.nextInt(firstNames.length)];
         String randomSurname = surnames[rand.nextInt(surnames.length)];
+        String randomRole = roles[rand.nextInt(roles.length)];
 
-        Employee randomEmployee = new Employee(randomFirstName, randomSurname);
+        Employee randomEmployee = new Employee(randomFirstName, randomSurname, randomRole);
         employeeList.add(randomEmployee);
 
-        System.out.println("Random employee generated and added: " + randomEmployee.getFullName());
+        System.out.println("Random employee generated and added: " + randomEmployee);
     }
 
-    /**
-     * Returns the company name.
-     */
     public String getCompanyName() {
         return companyName;
     }

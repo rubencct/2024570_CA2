@@ -25,69 +25,75 @@ public class Employee {
     // Field to store the employee's surname
     private String surname;
 
+    // Field to store the employee's role
+    private String role;
+
     /**
-     * Constructor that creates a new employee using the given first name and surname.
-     * 
+     * Constructor to initialise a new Employee with first name, surname, and role
      * @param firstName The employee's first name
      * @param surname The employee's surname
+     * @param role The employee's role in the company
      */
-    public Employee(String firstName, String surname) {
+    public Employee(String firstName, String surname, String role) {
         this.firstName = firstName;
         this.surname = surname;
+        this.role = role;
     }
 
     /**
-     * Gets the employee's first name.
-     * 
-     * @return The first name of the employee
+     * Returns the employee's first name
      */
     public String getFirstName() {
         return firstName;
     }
 
     /**
-     * Gets the employee's surname.
-     * 
-     * @return The surname of the employee
+     * Returns the employee's surname
      */
     public String getSurname() {
         return surname;
     }
 
     /**
-     * Sets a new first name for the employee.
-     * 
-     * @param firstName The new first name to assign
+     * Returns the employee's role
+     */
+    public String getRole() {
+        return role;
+    }
+
+    /**
+     * Updates the employee's first name
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
     /**
-     * Sets a new surname for the employee.
-     * 
-     * @param surname The new surname to assign
+     * Updates the employee's surname
      */
     public void setSurname(String surname) {
         this.surname = surname;
     }
 
     /**
-     * Returns the full name of the employee in the format: "FirstName Surname".
-     * 
-     * @return A string representing the full name
+     * Updates the employee's role
+     */
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    /**
+     * Returns the full name of the employee
      */
     public String getFullName() {
         return firstName + " " + surname;
     }
 
     /**
-     * Overrides the default toString() method to return the employee's full name.
-     * 
-     * @return The full name of the employee as a string
+     * Overrides toString() to return the full name and role
      */
     @Override
     public String toString() {
-        return getFullName();
+        return getFullName() + " - Role: " + role;
     }
 }
