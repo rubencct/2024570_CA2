@@ -5,12 +5,11 @@
 package ca_2;
 
 /**
- *
- * @author ruben_1d
- */
-    /**
  * Main entry point for StackFlow Systems application.
- * This program simulates a tech company managing employees and departments using Java OOP principles.
+ * This Java console program simulates a tech company managing its employees.
+ * It allows for adding, editing, sorting, deleting, and displaying employees
+ * using object-oriented programming principles.
+ * 
  * Author: Mario Rubén Arturo Vera Rodríguez
  * Student ID: 2024570
  */
@@ -19,66 +18,78 @@ import java.util.Scanner;
 
 public class StackFlowApp {
 
-    // Scanner object to capture user input from the keyboard
+    // Scanner object to capture user input from the console
     private static Scanner keyboardScanner = new Scanner(System.in);
 
-    // Object that represents the tech company (StackFlow Systems)
+    // Object that represents our tech company StackFlow Systems
     private static TechCompany stackFlowCompany = new TechCompany("StackFlow Systems Ltd.");
 
     /**
-     * Main method that launches the program and displays the user menu.
+     * This is the main method that gets called when the program runs.
+     * It shows the menu, accepts user input, and performs the chosen action.
      */
     public static void main(String[] args) {
-        boolean keepRunning = true;
+        boolean keepRunning = true; // Controls the main loop
 
         while (keepRunning) {
-            showMenu();
+            showMenu(); // Show available options to the user
             System.out.print("Please select an option (1-8): ");
             String userChoice = keyboardScanner.nextLine();
 
+            // Decide what to do based on the user's selection
             switch (userChoice) {
                 case "1":
+                    // Manually add a new employee to the system
                     stackFlowCompany.addEmployeeManually();
-                    System.out.println("\n\n"); //for visual separation 
+                    System.out.println("\n\n"); // Add spacing to improve readability
                     break;
                 case "2":
+                    // Add a randomly generated employee (name + surname)
                     stackFlowCompany.generateRandomEmployee();
-                    System.out.println("\n\n"); //for visual separation 
+                    System.out.println("\n\n");
                     break;
                 case "3":
+                    // Search for an employee using part of their name
                     stackFlowCompany.searchEmployeeByName();
-                    System.out.println("\n\n"); //for visual separation 
+                    System.out.println("\n\n");
                     break;
                 case "4":
+                    // Sort the list of employees in alphabetical order
                     stackFlowCompany.sortEmployeesAlphabetically();
-                    System.out.println("\n\n"); //for visual separation 
+                    System.out.println("\n\n");
                     break;
                 case "5":
+                    // Show all current employees in the system
                     stackFlowCompany.displayAllEmployees();
-                    System.out.println("\n\n"); //for visual separation 
+                    System.out.println("\n\n");
                     break;
                 case "6":
+                    // Edit the name of an employee
                     stackFlowCompany.editEmployeeDetails();
-                    System.out.println("\n\n"); //for visual separation 
+                    System.out.println("\n\n");
                     break;
                 case "7":
+                    // Delete an employee after confirming selection
                     stackFlowCompany.deleteEmployee();
-                    System.out.println("\n\n"); // for visual separation
-                    break;   
-                    case "8":
+                    System.out.println("\n\n");
+                    break;
+                case "8":
+                    // Exit the program with a goodbye message
                     System.out.println("Thanks for using StackFlow Systems application");
                     System.out.println("StackFlow Systems Ltd. - Developed by Rubén Vera");
                     System.out.println("Goodbye!");
                     keepRunning = false;
                     break;
                 default:
-                    System.out.println("Invalid option. Please enter a number between 1 and 6.\n");
+                    // Invalid input handling
+                    System.out.println("Invalid option. Please enter a number between 1 and 8.\n");
             }
         }
     }
 
     /**
-     * Displays the main user menu with available options.
+     * This method prints the main menu with all available actions.
+     * It's called at the beginning of each loop to guide the user.
      */
     private static void showMenu() {
         System.out.println("===== STACKFLOW SYSTEMS MENU =====");
@@ -93,5 +104,3 @@ public class StackFlowApp {
         System.out.println("==================================");
     }
 }
-
-
