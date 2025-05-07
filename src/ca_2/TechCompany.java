@@ -20,16 +20,22 @@ import java.util.Random;
  * Represents a technology company that manages a list of employees.
  * Includes functionality to add, generate, search, sort, display, edit,
  * and delete employees.
+ * 
+ * Author: Mario Rubén Arturo Vera Rodríguez
+ * Student ID: 2024570
  */
 public class TechCompany {
 
-    // Field to store the company name
+    // Name of the tech company (e.g. StackFlow Systems Ltd.)
     private String companyName;
 
-    // List to store Employee objects
+    // Stores all employees added to the system
     private List<Employee> employeeList;
 
-    // Constructor that accepts a company name and initialises the employee list
+    /**
+     * Constructor to initialise the company with a given name.
+     * It also prepares an empty list to hold employee records.
+     */
     public TechCompany(String companyName) {
         this.companyName = companyName;
         this.employeeList = new ArrayList<>();
@@ -37,13 +43,14 @@ public class TechCompany {
 
     // Method 1: Add a new employee manually
     /**
-     * Adds a new employee to the list based on user input.
-     * Now includes first name and surname input separately.
-     * Also validates that input is not empty or contains invalid characters.
+     * Prompts the user to manually input an employee's first name and surname.
+     * Performs validation to ensure the input is not empty and contains only allowed characters.
+     * It also checks for duplicates before adding the employee.
      */
     public void addEmployeeManually() {
         Scanner scanner = new Scanner(System.in);
 
+        // Validation for first name
         String firstName;
         while (true) {
             System.out.print("Enter employee's first name: ");
@@ -55,6 +62,7 @@ public class TechCompany {
             }
         }
 
+        // Validation for surname
         String surname;
         while (true) {
             System.out.print("Enter employee's surname: ");
@@ -87,8 +95,8 @@ public class TechCompany {
 
     // Method 2: Generate a random employee
     /**
-     * Generates a random employee with a first name and surname.
-     * Uses two separate arrays to pick each part of the name.
+     * Automatically generates an employee by randomly combining a first name and surname.
+     * The names are chosen from predefined name pools.
      */
     public void generateRandomEmployee() {
         String[] firstNames = {"Alice", "Oisin", "Darragh", "Diana", "Ethan", "Fiona", "Saoirce", "Cian"};
@@ -113,8 +121,8 @@ public class TechCompany {
 
     // Method 3: Search employee by name
     /**
-     * Prompts the user to enter a name and checks if it exists in the employee list.
-     * The comparison ignores case and matches even if it's a partial name.
+     * Allows the user to search for an employee by typing a part of their name.
+     * The search is not case sensitive and supports partial matches.
      */
     public void searchEmployeeByName() {
         Scanner scanner = new Scanner(System.in);
@@ -139,8 +147,8 @@ public class TechCompany {
 
     // Method 4: Sort employees alphabetically
     /**
-     * Sorts the employee list alphabetically and displays the result.
-     * Sorting is done by full name in a case-insensitive manner.
+     * Sorts the employee list in alphabetical order based on full name.
+     * Uses case-insensitive comparison to ensure consistency.
      */
     public void sortEmployeesAlphabetically() {
         employeeList.sort((a, b) -> a.getFullName().compareToIgnoreCase(b.getFullName()));
@@ -150,8 +158,8 @@ public class TechCompany {
 
     // Method 5: Display all employees
     /**
-     * Displays all employee full names in the list.
-     * Also shows the total count of employees.
+     * Displays all employees currently stored in the list.
+     * It shows their full names and the total number of employees.
      */
     public void displayAllEmployees() {
         if (employeeList.isEmpty()) {
@@ -167,8 +175,8 @@ public class TechCompany {
 
     // Method 6: Edit employee details
     /**
-     * Allows editing an existing employee's first name and/or surname.
-     * Supports partial name search and lets the user choose the correct employee.
+     * Edits the details (first name and/or surname) of an existing employee.
+     * Uses a search term to find matching names and allows the user to choose the correct one if multiple matches exist.
      */
     public void editEmployeeDetails() {
         Scanner scanner = new Scanner(System.in);
@@ -210,7 +218,7 @@ public class TechCompany {
             }
         }
 
-        // Get new details
+        // Get new details from the user
         System.out.print("Enter new first name: ");
         String newFirstName = scanner.nextLine().trim();
         System.out.print("Enter new surname: ");
@@ -222,10 +230,12 @@ public class TechCompany {
         System.out.println("Employee information updated: " + selectedEmployee.getFullName());
         System.out.println();
     }
+
     // Method 7: Delete an Employee
     /**
-     * Deletes an employee based on a partial or full name match.
-     * If multiple matches are found, the user selects the correct one to delete.
+     * Deletes an employee based on partial name search.
+     * Confirms the action before deleting.
+     * Handles both single and multiple matches to avoid deleting the wrong person.
      */
     public void deleteEmployee() {
         Scanner scanner = new Scanner(System.in);
@@ -253,11 +263,10 @@ public class TechCompany {
             System.out.println("Match found: " + employeeToDelete.getFullName());
             System.out.print("Are you sure you want to delete this employee? (Y/N): ");
             String confirmation = scanner.nextLine().trim().toLowerCase();
-            if (!confirmation.equalsIgnoreCase("y")) {
+            if (!confirmation.equals("y")) {
                 System.out.println("Deletion cancelled.");
                 return;
             }
-                    
         } else {
             // Multiple matches
             System.out.println("Multiple matches found:");

@@ -5,6 +5,11 @@
 package ca_2;
 
 /**
+ *
+ * @author ruben_1d
+ */
+
+/**
  * Main entry point for StackFlow Systems application.
  * This Java console program simulates a tech company managing its employees.
  * It allows for adding, editing, sorting, deleting, and displaying employees
@@ -35,7 +40,7 @@ public class StackFlowApp {
             showMenu(); // Show available options to the user
             System.out.print("Please select an option (1-8): ");
             String userChoice = keyboardScanner.nextLine();
-
+            System.out.println("\n\n");
             // Decide what to do based on the user's selection
             switch (userChoice) {
                 case "1":

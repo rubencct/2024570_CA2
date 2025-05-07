@@ -10,7 +10,12 @@ package ca_2;
  */
 
 /**
- * Represents an individual employee with a first name and surname.
+ * Represents an individual employee with a first name and a surname.
+ * This class includes methods to access and modify these values, 
+ * as well as to retrieve the full name.
+ * 
+ * Author: Mario Rubén Arturo Vera Rodríguez
+ * Student ID: 2024570
  */
 public class Employee {
 
@@ -21,7 +26,8 @@ public class Employee {
     private String surname;
 
     /**
-     * Constructor to initialise a new Employee with first name and surname
+     * Constructor that creates a new employee using the given first name and surname.
+     * 
      * @param firstName The employee's first name
      * @param surname The employee's surname
      */
@@ -31,45 +37,57 @@ public class Employee {
     }
 
     /**
-     * Returns the employee's first name
+     * Gets the employee's first name.
+     * 
+     * @return The first name of the employee
      */
     public String getFirstName() {
         return firstName;
     }
 
     /**
-     * Returns the employee's surname
+     * Gets the employee's surname.
+     * 
+     * @return The surname of the employee
      */
     public String getSurname() {
         return surname;
     }
 
     /**
-     * Updates the employee's first name
+     * Sets a new first name for the employee.
+     * 
+     * @param firstName The new first name to assign
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
     /**
-     * Updates the employee's surname
+     * Sets a new surname for the employee.
+     * 
+     * @param surname The new surname to assign
      */
     public void setSurname(String surname) {
         this.surname = surname;
     }
-    
+
     /**
-     * Returns the full name of the employee
+     * Returns the full name of the employee in the format: "FirstName Surname".
+     * 
+     * @return A string representing the full name
      */
     public String getFullName() {
         return firstName + " " + surname;
     }
 
     /**
-     * Overrides toString() to return the full name directly
+     * Overrides the default toString() method to return the employee's full name.
+     * 
+     * @return The full name of the employee as a string
      */
     @Override
     public String toString() {
         return getFullName();
     }
-} 
+}
