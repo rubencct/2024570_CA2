@@ -183,7 +183,7 @@ public class TechCompany {
         } else {
             System.out.println("Employee List:");
             for (Employee emp : employeeList) {
-                System.out.println("- " + emp.getFullName());
+                System.out.println("- " + emp.getFullName() + " (" + emp.getRole() + ")");
             }
             System.out.println("Total employees: " + employeeList.size());
         }
