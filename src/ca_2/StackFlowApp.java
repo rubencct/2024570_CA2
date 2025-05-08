@@ -90,7 +90,7 @@ public class StackFlowApp {
                         } else {
                             System.out.println("Exit cancelled. Returning to menu...");
                         }
-                        System.out.println(); // visual space
+                        System.out.println(); // just visual space
                         break;
                     
                 default:

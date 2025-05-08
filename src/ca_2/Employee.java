@@ -10,90 +10,48 @@ package ca_2;
  */
 
 /**
- * Represents an individual employee with a first name and a surname.
- * This class includes methods to access and modify these values, 
- * as well as to retrieve the full name.
+ * Represents an individual employee who is a person with a specific role in the company.
+ * Inherits basic personal information from the Person class.
+ *
  * 
  * Author: Mario Rubén Arturo Vera Rodríguez
  * Student ID: 2024570
  */
-public class Employee {
+public class Employee extends Person {
 
-    // Field to store the employee's first name
-    private String firstName;
-
-    // Field to store the employee's surname
-    private String surname;
-
-    // Field to store the employee's role
+    // Role of the employee within the company
     private String role;
 
     /**
-     * Constructor to initialise a new Employee with first name, surname, and role
-     * @param firstName The employee's first name
-     * @param surname The employee's surname
-     * @param role The employee's role in the company
+     * Constructor to initialise a new Employee with first name, surname and role.
+     * @param firstName The employee's first name.
+     * @param surname The employee's surname.
+     * @param role The role of the employee in the company.
      */
     public Employee(String firstName, String surname, String role) {
-        this.firstName = firstName;
-        this.surname = surname;
+        super(firstName, surname); // Call constructor of Person
         this.role = role;
     }
 
     /**
-     * Returns the employee's first name
-     */
-    public String getFirstName() {
-        return firstName;
-    }
-
-    /**
-     * Returns the employee's surname
-     */
-    public String getSurname() {
-        return surname;
-    }
-
-    /**
-     * Returns the employee's role
+     * Returns the role of the employee.
      */
     public String getRole() {
         return role;
     }
 
     /**
-     * Updates the employee's first name
-     */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    /**
-     * Updates the employee's surname
-     */
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    /**
-     * Updates the employee's role
+     * Updates the role of the employee.
      */
     public void setRole(String role) {
         this.role = role;
     }
 
     /**
-     * Returns the full name of the employee
-     */
-    public String getFullName() {
-        return firstName + " " + surname;
-    }
-
-    /**
-     * Overrides toString() to return the full name and role
+     * Returns the employee's full name and role as a formatted string.
      */
     @Override
     public String toString() {
-        return getFullName() + " - Role: " + role;
+        return getFullName() + " (" + role + ")";
     }
 }

@@ -38,7 +38,8 @@ public class TechCompany {
         "Printer Technician",
         "CCTV Installer",
         "Front Desk Assistant",
-        "Cashier"
+        "Cashier",
+        "Manager"
     };
 
     /**
