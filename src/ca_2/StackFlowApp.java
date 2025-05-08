@@ -79,6 +79,11 @@ public class StackFlowApp {
                     System.out.println("\n\n");
                     break;
                 case "8":
+                    stackFlowCompany.addManagerManually();
+                    System.out.println("\n\n");
+                    break;    
+                    
+                case "9":
                     // Exit the program with a goodbye message
                     System.out.print("Are you sure you want to exit the program? (Y/N): ");
                         String confirmExit = keyboardScanner.nextLine().trim().toLowerCase();
@@ -113,7 +118,8 @@ public class StackFlowApp {
         System.out.println("5. Display all employees");
         System.out.println("6. Edit employee details");
         System.out.println("7. Delete employee");
-        System.out.println("8. Exit");
+        System.out.println("8. Add manager manually");
+        System.out.println("9. Exit");
         System.out.println("==================================");
     }
 }

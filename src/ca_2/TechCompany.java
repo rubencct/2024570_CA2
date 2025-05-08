@@ -38,8 +38,7 @@ public class TechCompany {
         "Printer Technician",
         "CCTV Installer",
         "Front Desk Assistant",
-        "Cashier",
-        "Manager"
+        "Cashier"
     };
 
     /**
@@ -129,6 +128,39 @@ public class TechCompany {
             System.out.println("Employee added: " + newEmployee);
         }
     }
+     /**
+     * Extra to add Manager 
+     */
+    
+            public void addManagerManually() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter manager's first name (or type 'CANCEL' to return): ");
+        String firstName = scanner.nextLine().trim();
+        if (firstName.equalsIgnoreCase("cancel")) {
+            System.out.println("Action cancelled. Returning to main menu.");
+            return;
+        }
+
+        System.out.print("Enter manager's surname (or type 'CANCEL' to return): ");
+        String surname = scanner.nextLine().trim();
+        if (surname.equalsIgnoreCase("cancel")) {
+            System.out.println("Action cancelled. Returning to main menu.");
+            return;
+        }
+
+        System.out.print("Enter department name (or type 'CANCEL' to return): ");
+        String departmentName = scanner.nextLine().trim();
+        if (departmentName.equalsIgnoreCase("cancel")) {
+            System.out.println("Action cancelled. Returning to main menu.");
+            return;
+        }
+
+        Department department = new Department(departmentName);
+        Manager newManager = new Manager(firstName, surname, department);
+        employeeList.add(newManager);
+        System.out.println("Manager added: " + newManager);
+    }
 
     // Method 2: Generate a random employee
     public void generateRandomEmployee() {
@@ -198,7 +230,12 @@ public class TechCompany {
         } else {
             System.out.println("Employee List:");
             for (Employee emp : employeeList) {
-                System.out.println("- " + emp.getFullName() + " (" + emp.getRole() + ")");
+                if (emp instanceof Manager) {
+                    Manager manager = (Manager) emp;
+                    System.out.println("- " + manager.getFullName() + " (" + manager.getRole() + ", Dept: " + manager.getDepartment() + ")");
+                } else {
+                    System.out.println("- " + emp.getFullName() + " (" + emp.getRole() + ")");
+                }
             }
             System.out.println("Total employees: " + employeeList.size());
         }
