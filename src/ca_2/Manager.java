@@ -26,7 +26,7 @@ public class Manager extends Employee {
      * @param department The department the manager is responsible for
      */
     public Manager(String firstName, String surname, Department department) {
-        super(firstName, surname, "Manager");
+        super(firstName, surname, "Manager", department);
         this.department = department;
     }
 

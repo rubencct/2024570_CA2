@@ -21,6 +21,9 @@ public class Employee extends Person {
 
     // Role of the employee within the company
     private String role;
+    
+    // Department to which the employee is assigned
+    private Department department;
 
     /**
      * Constructor to initialise a new Employee with first name, surname and role.
@@ -28,9 +31,10 @@ public class Employee extends Person {
      * @param surname The employee's surname.
      * @param role The role of the employee in the company.
      */
-    public Employee(String firstName, String surname, String role) {
+    public Employee(String firstName, String surname, String role, Department department) {
         super(firstName, surname); // Call constructor of Person
         this.role = role;
+        this.department = department;
     }
 
     /**
@@ -48,10 +52,24 @@ public class Employee extends Person {
     }
 
     /**
-     * Returns the employee's full name and role as a formatted string.
+     * Returns the department of the employee.
+     */
+    public Department getDepartment() {
+        return department;
+    }
+
+    /**
+     * Updates the department of the employee.
+     */
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    /**
+     * Returns the employee's full name, role and department as a formatted string.
      */
     @Override
     public String toString() {
-        return getFullName() + " (" + role + ")";
+        return getFullName() + " (" + role + ", Dept: " + department + ")";
     }
 }

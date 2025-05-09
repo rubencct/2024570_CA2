@@ -40,6 +40,15 @@ public class TechCompany {
         "Front Desk Assistant",
         "Cashier"
     };
+    
+    // Predefined list of departments
+    private final Department[] departments = {
+        new Department("IT"),
+        new Department("Repairs"),
+        new Department("Sales"),
+        new Department("Customer Service"),
+        new Department("Finance")
+    };
 
     /**
      * Constructor to initialise the company with a given name.
@@ -52,7 +61,7 @@ public class TechCompany {
 
     // Method 1: Add a new employee manually
     /**
-     * Prompts the user to manually input an employee's first name and surname.
+     * Prompts the user to manually input an employee's first name and surname as well as role and department.
      * Performs validation to ensure the input is not empty and contains only allowed characters.
      * It also checks for duplicates before adding the employee.
      */
@@ -109,8 +118,25 @@ public class TechCompany {
                 System.out.println("Invalid choice. Please try again.");
             }
         }
+        
+        System.out.println("Select a department:");
+        for (int i = 0; i < departments.length; i++) {
+            System.out.println((i + 1) + ". " + departments[i].getDepartmentName());
+        }
+        Department department;
+        while (true) {
+            System.out.print("Enter the number of the department: ");
+            int deptChoice = scanner.nextInt();
+            scanner.nextLine();
+            if (deptChoice >= 1 && deptChoice <= departments.length) {
+                department = departments[deptChoice - 1];
+                break;
+            } else {
+                System.out.println("Invalid choice. Please try again.");
+            }
+        }        
 
-        Employee newEmployee = new Employee(firstName, surname, role);
+        Employee newEmployee = new Employee(firstName, surname, role, department);
 
         // Check for duplicates before adding
         boolean exists = false;
@@ -128,39 +154,63 @@ public class TechCompany {
             System.out.println("Employee added: " + newEmployee);
         }
     }
-     /**
-     * Extra to add Manager 
-     */
     
-            public void addManagerManually() {
-        Scanner scanner = new Scanner(System.in);
+    
+    /**
+    * Extra to add Manager manually 
+    * Prompts the user to manually input a manager's first name, surname, and department.
+    * Uses the predefined department list to select a department.
+    */
+    public void addManagerManually() {
+       Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter manager's first name (or type 'CANCEL' to return): ");
-        String firstName = scanner.nextLine().trim();
-        if (firstName.equalsIgnoreCase("cancel")) {
-            System.out.println("Action cancelled. Returning to main menu.");
-            return;
-        }
+       System.out.print("Enter manager's first name (or type 'CANCEL' to return): ");
+       String firstName = scanner.nextLine().trim();
+       if (firstName.equalsIgnoreCase("cancel")) {
+           System.out.println("Action cancelled. Returning to main menu.");
+           return;
+       }
 
-        System.out.print("Enter manager's surname (or type 'CANCEL' to return): ");
-        String surname = scanner.nextLine().trim();
-        if (surname.equalsIgnoreCase("cancel")) {
-            System.out.println("Action cancelled. Returning to main menu.");
-            return;
-        }
+       System.out.print("Enter manager's surname (or type 'CANCEL' to return): ");
+       String surname = scanner.nextLine().trim();
+       if (surname.equalsIgnoreCase("cancel")) {
+           System.out.println("Action cancelled. Returning to main menu.");
+           return;
+       }
 
-        System.out.print("Enter department name (or type 'CANCEL' to return): ");
-        String departmentName = scanner.nextLine().trim();
-        if (departmentName.equalsIgnoreCase("cancel")) {
-            System.out.println("Action cancelled. Returning to main menu.");
-            return;
-        }
+       // Display list of departments
+       System.out.println("Select a department:");
+       for (int i = 0; i < departments.length; i++) {
+           System.out.println((i + 1) + ". " + departments[i].getDepartmentName());
+       }
 
-        Department department = new Department(departmentName);
-        Manager newManager = new Manager(firstName, surname, department);
-        employeeList.add(newManager);
-        System.out.println("Manager added: " + newManager);
-    }
+       Department selectedDepartment;
+       while (true) {
+           System.out.print("Enter the number of the department: ");
+           String input = scanner.nextLine().trim();
+
+           if (input.equalsIgnoreCase("cancel")) {
+               System.out.println("Action cancelled. Returning to main menu.");
+               return;
+           }
+
+           try {
+               int deptChoice = Integer.parseInt(input);
+               if (deptChoice >= 1 && deptChoice <= departments.length) {
+                   selectedDepartment = departments[deptChoice - 1];
+                   break;
+               } else {
+                   System.out.println("Invalid choice. Please try again.");
+               }
+           } catch (NumberFormatException e) {
+               System.out.println("Invalid input. Please enter a number.");
+           }
+       }
+
+       Manager newManager = new Manager(firstName, surname, selectedDepartment);
+       employeeList.add(newManager);
+       System.out.println("Manager added: " + newManager);
+   }
 
     // Method 2: Generate a random employee
     public void generateRandomEmployee() {
@@ -171,8 +221,9 @@ public class TechCompany {
         String randomFirstName = firstNames[rand.nextInt(firstNames.length)];
         String randomSurname = surnames[rand.nextInt(surnames.length)];
         String randomRole = roles[rand.nextInt(roles.length)];
+        Department randomDepartment = departments[rand.nextInt(departments.length)];
 
-        Employee randomEmployee = new Employee(randomFirstName, randomSurname, randomRole);
+        Employee randomEmployee = new Employee(randomFirstName, randomSurname, randomRole, randomDepartment);
         employeeList.add(randomEmployee);
 
         System.out.println("Random employee generated and added: " + randomEmployee);
@@ -230,13 +281,7 @@ public class TechCompany {
         } else {
             System.out.println("Employee List:");
             for (Employee emp : employeeList) {
-                if (emp instanceof Manager) {
-                    Manager manager = (Manager) emp;
-                    System.out.println("- " + manager.getFullName() + " (" + manager.getRole() + ", Dept: " + manager.getDepartment() + ")");
-                } else {
-                    System.out.println("- " + emp.getFullName() + " (" + emp.getRole() + ")");
-                }
-            }
+                System.out.println("- " + emp);}
             System.out.println("Total employees: " + employeeList.size());
         }
     }
