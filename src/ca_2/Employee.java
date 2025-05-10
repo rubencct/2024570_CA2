@@ -7,69 +7,49 @@ package ca_2;
 /**
  *
  * @author ruben_1d
+ * Mario Rubén Arturo Vera Rodriguez
+ * Student number: 2024570
  */
 
 /**
- * Represents an individual employee who is a person with a specific role in the company.
- * Inherits basic personal information from the Person class.
- *
- * 
- * Author: Mario Rubén Arturo Vera Rodríguez
- * Student ID: 2024570
+ * This class represents an Employee.
+ * It extends the Person class and adds a new field: department.
+ * This class acts as a middle layer between Person and Applicant.
  */
 public class Employee extends Person {
 
-    // Role of the employee within the company
-    private String role;
-    
-    // Department to which the employee is assigned
-    private Department department;
+    // The department this employee belongs to (e.g. "Finance", "HR")
+    protected String department;
 
     /**
-     * Constructor to initialise a new Employee with first name, surname and role.
-     * @param firstName The employee's first name.
-     * @param surname The employee's surname.
-     * @param role The role of the employee in the company.
+     * Constructor for an Employee.
+     * It uses the super keyword to call the constructor from the Person class
+     * and sets the department for the employee.
+     *
+     * @param firstName  The employee’s first name
+     * @param surname    The employee’s last name
+     * @param department The department they work in
      */
-    public Employee(String firstName, String surname, String role, Department department) {
+    public Employee(String firstName, String surname, String department) {
         super(firstName, surname); // Call constructor of Person
-        this.role = role;
         this.department = department;
     }
 
     /**
-     * Returns the role of the employee.
+     * Getter method to access the department of the employee.
+     * @return A string with the department name
      */
-    public String getRole() {
-        return role;
-    }
-
-    /**
-     * Updates the role of the employee.
-     */
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    /**
-     * Returns the department of the employee.
-     */
-    public Department getDepartment() {
+    public String getDepartment() {
         return department;
     }
 
     /**
-     * Updates the department of the employee.
-     */
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-    /**
-     * Returns the employee's full name, role and department as a formatted string.
+     * Overrides the getDetails() method from Person to also include department.
+     * Useful for displaying complete employee information.
+     * @return A string like: "John Murphy - Dept: Marketing"
      */
     @Override
-    public String toString() {
-        return getFullName() + " (" + role + ", Dept: " + department + ")";
+    public String getDetails() {
+        return super.getDetails() + " - Dept: " + department;
     }
 }

@@ -7,53 +7,55 @@ package ca_2;
 /**
  *
  * @author ruben_1d
+ * Mario Rubén Arturo Vera Rodriguez
+ * Student number: 2024570
  */
 
 /**
- * Represents a generic person with a first name and a surname.
- * This class serves as a parent class for more specific types like Employee.
+ * This class represents a generic person with a first name and surname.
+ * It is designed to be a base class for other types of people (e.g., Applicant).
+ * Both attributes are protected so subclasses can access them directly if needed.
  */
 public class Person {
 
-    // Field for the person's first name
-    private String firstName;
+    // The person's first name (e.g. "Emma")
+    protected String firstName;
 
-    // Field for the person's surname
-    private String surname;
+    // The person's surname or family name (e.g. "Murphy")
+    protected String surname;
 
     /**
-     * Constructor to initialise a new Person.
-     * @param firstName The first name of the person.
-     * @param surname The surname of the person.
+     * Constructor that creates a new Person object with the given names.
+     * @param firstName The person's given name
+     * @param surname The person's family name
      */
     public Person(String firstName, String surname) {
         this.firstName = firstName;
         this.surname = surname;
     }
 
-    // Getter and setter for first name
+    /**
+     * Returns the first name of the person.
+     * @return A string representing the first name.
+     */
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    // Getter and setter for surname
+    /**
+     * Returns the surname of the person.
+     * @return A string representing the surname.
+     */
     public String getSurname() {
         return surname;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
     /**
-     * Returns the full name of the person.
-     * @return The concatenation of first name and surname.
+     * Returns the full name of the person in a readable format.
+     * This method is often overridden in subclasses to include more details.
+     * @return A string with first name and surname.
      */
-    public String getFullName() {
+    public String getDetails() {
         return firstName + " " + surname;
     }
 }
