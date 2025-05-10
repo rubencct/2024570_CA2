@@ -166,7 +166,7 @@ public class Main {
                     
                     //Validation to ensure the input is a valid name  
                     if (!first.matches("[a-zA-ZÀ-ÿ\\s'-]+")) {
-                        System.out.println("Invalid first name. Only letters and basic characters are allowed.");
+                        System.out.println("Invalid first name. Only letters are allowed.");
                         break;
                     }
                     
@@ -177,7 +177,7 @@ public class Main {
                     
                     //Validation to ensure surname is valid. 
                     if (!last.matches("[a-zA-ZÀ-ÿ\\s'-]+")) {
-                        System.out.println("Invalid surname. Only letters and basic characters are allowed.");
+                        System.out.println("Invalid surname. Only letters are allowed.");
                         break;
                     }
 
